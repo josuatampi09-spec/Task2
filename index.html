@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus LMS - Ujian PPLG</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Layar Login (Pendaftaran) -->
+    <div id="loginScreen" class="auth-container fade-in">
+        <div class="auth-box">
+            <h1><i class="fas fa-gamepad"></i> Nexus LMS</h1>
+            <p>Portal Ujian PPLG Fase E</p>
+            <div class="input-group">
+                <input type="text" id="loginNama" placeholder="Ketik Nama Lengkap Anda..." autocomplete="off">
+            </div>
+            <button class="btn-primary" onclick="loginSiswa()">Mulai Petualangan</button>
+        </div>
+    </div>
+
+    <!-- Sistem LMS Utama (Tersembunyi sebelum login) -->
+    <div id="lmsApp" class="app-layout hidden">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>Nexus LMS</h2>
+            </div>
+            <div class="user-profile">
+                <div class="avatar"><i class="fas fa-user-astronaut"></i></div>
+                <h3 id="displayNama">Siswa</h3>
+                <span class="level-badge">Level 1: Novice Coder</span>
+            </div>
+            <nav class="menu">
+                <a href="#" class="active" onclick="switchTab('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#" onclick="switchTab('ujian')"><i class="fas fa-laptop-code"></i> Ujian Aktif</a>
+                <a href="#" onclick="switchTab('profil')"><i class="fas fa-trophy"></i> Pencapaian</a>
+                <a href="#" onclick="location.reload()" style="color: #ef4444;"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+            </nav>
+        </aside>
+
+        <!-- Konten Utama -->
+        <main class="content-area">
+            
+            <!-- Tab Dashboard -->
+            <div id="tab-dashboard" class="tab-content fade-in">
+                <header class="top-bar">
+                    <h2>Beranda</h2>
+                </header>
+                <div class="welcome-banner">
+                    <div class="text">
+                        <h1>Selamat Datang, <span id="dashNama"></span>!</h1>
+                        <p>Ujian Dasar-Dasar Pengembangan Perangkat Lunak & Gim telah tersedia.</p>
+                        <button class="btn-warning" onclick="switchTab('ujian')"><i class="fas fa-play-circle"></i> Mulai Ujian Sekarang</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Ujian -->
+            <div id="tab-ujian" class="tab-content hidden fade-in">
+                <header class="top-bar">
+                    <h2>Lembar Ujian PPLG</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="examProgress"></div>
+                    </div>
+                </header>
+                
+                <div class="exam-container" id="examFormContainer">
+                    <form id="ujianForm">
+                        <div id="soalPilihanGanda"></div>
+                        <hr class="divider">
+                        <h3 class="section-title">Bagian II: Soal Essay</h3>
+                        <p class="section-desc">Jawablah pertanyaan berikut dengan penalaran yang logis dan jelas.</p>
+                        <div id="soalEssay"></div>
+                        
+                        <div class="submit-area">
+                            <button type="submit" class="btn-success" id="btnSubmitUjian"><i class="fas fa-paper-plane"></i> Kirim Jawaban Akhir</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Hasil Ujian (Muncul setelah submit) -->
+                <div id="examResultContainer" class="hidden text-center card">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"></i>
+                    <h2>Ujian Selesai!</h2>
+                    <p>Skor Pilihan Ganda Anda:</p>
+                    <h1 class="skor-akhir" id="skorDisplay">0</h1>
+                    <p class="text-muted">Jawaban essay telah dikirim ke server sekolah dan akan dinilai secara manual oleh instruktur.</p>
+                </div>
+            </div>
+
+            <!-- Tab Profil -->
+            <div id="tab-profil" class="tab-content hidden fade-in">
+                <header class="top-bar">
+                    <h2>Profil & Pencapaian</h2>
+                </header>
+                <div class="card text-center">
+                    <i class="fas fa-user-astronaut" style="font-size: 5rem; color: #4f46e5;"></i>
+                    <h2 style="margin-top: 15px;" id="profilNama">Nama</h2>
+                    <p>XP Terkumpul: <strong>500 XP</strong></p>
+                    <p>Status: Menunggu hasil evaluasi essay.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
